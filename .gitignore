@@ -28,3 +28,8 @@ node_modules
 .lock-wscript
 
 bower_components
+
+# Sublime
+
+*.sublime-project
+*.sublime-workspace
