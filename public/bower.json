@@ -1,0 +1,20 @@
+{
+  "name": "react-chat",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mtford90/react-chat",
+  "authors": [
+    "vitosamson <vslavilla@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.0"
+  }
+}
