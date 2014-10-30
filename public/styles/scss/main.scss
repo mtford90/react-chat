@@ -1,5 +1,39 @@
 body {
-	background: red;
-	color: blue;
-}    
+	background: #40201b;
+	color: #e2d8d8;
+}
 
+#content {
+	width: 800px;
+	padding: 0;
+	margin: 0;
+	ul {
+		background-color: white;
+		&#usernames { 
+			float: right;
+			width: 150px;
+			height: 500px;
+			padding: 0;
+			margin: 0;
+		}
+		&#messages {
+			float: left;
+			width: 640px;
+			height: 500px;
+			padding: 0;
+			margin: 0;
+		}
+	}	
+}
+
+#input {
+	#message {
+		width: 750px;
+		height: 40px;
+	}
+
+	#submit {
+		width: 50px;
+		height: 40px;
+	}
+}

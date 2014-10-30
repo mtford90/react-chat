@@ -4,8 +4,15 @@
 	<link rel="stylesheet" type="text/css" href="styles/css/main.css"/>
 	<script src="bower_components/react/react.js"></script>
 	<script src="bower_components/react/JSXTransformer.js"></script>
+	<script src="js/chat.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-	HELLO WORLD!
+	<div id="content">
+		<ul id="messages"></ul>
+		<ul id="usernames"></ul>
+	</div>
+	<input id="message" type="text"></input>
+	<button id="submit">Go</button>
 </body>
-</html>
+</html>    
