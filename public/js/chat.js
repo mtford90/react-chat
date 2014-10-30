@@ -1,6 +1,13 @@
 /** @jsx React.DOM */
 /* global React */
 
+/*
+- React is a JavaScript library for creating user interfaces.
+- React is all about building reusable components. 
+- "*React* to data changes"
+	- It uses a fast, internal mock DOM to perform diffs and computes the most efficient DOM mutation for you.
+ */
+
 var MessageBox = React.createClass({
   render: function() {
     var messageComponents = [];
@@ -8,7 +15,10 @@ var MessageBox = React.createClass({
     this.props.messages.forEach(function(message) {
       messageComponents.push(<Message username={message.username} message={message.message} key={message.id}/>);
     });
-
+	/* 
+      JSX is transformed into native Javascript. If we didn't use JSX, it would like this:
+      	- React.createElement('ul', { id: 'messages' }, messageComponents); 
+  	 */
     return (
       <ul id="messages">
       	{messageComponents}
@@ -64,6 +74,7 @@ var MESSAGES = [
   {username: 'Vito', message: 'Wassup', id: 2}
 ];
 
+/* Render HTML tags through use of lowercase names */
 React.render((
 	<div>
 		<div id="content">
