@@ -11,21 +11,33 @@ body {
 	padding: 0;
 	margin: 0;
 	height: 500px;
+	color: black;
 	ul {
+		list-style-type: none;
 		background-color: white;
 		&#usernames { 
 			float: right;
-			width: 150px;
-			height: 500px;
+			width: 140px;
+			height: 490px;
 			padding: 0;
 			margin: 0;
+			.username {
+				font-weight: bold;
+			}
+			padding: 5px;
+
 		}
 		&#messages {
 			float: left;
-			width: 640px;
-			height: 500px;
-			padding: 0;
+			width: 630px;
+			height: 490px;
+			padding: 5px;
 			margin: 0;
+			.username {
+				font-weight: bold;
+				margin-right: 5px;
+			}
+			overflow: scroll;
 		}
 	}	
 } 
