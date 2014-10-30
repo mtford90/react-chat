@@ -5,7 +5,8 @@ var http = require('http'),
 
 var app = http.createServer(),
     io = socketio(app),
-    users = [];
+    users = [],
+    sockets = {};
 
 var express = require('express'),
     app = express(),
@@ -23,12 +24,22 @@ io.on('connection', function(socket) {
 
     socket.emit('new user', { username: data.username, users: users });
     users.push(data.username);
+    sockets[socket.id] = data.username;
   });
 
   socket.on('message', function(data) {
     console.log('new message: ' + data);
 
     socket.emit('message', { text: data.message });
+  });
+
+  socket.on('disconnect', function() {
+    var user = sockets[socket.id],
+        index = users.indexOf(user);
+
+    delete user[index];
+
+    socket.emit('updated users', { users: users });
   });
 });
 
