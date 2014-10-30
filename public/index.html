@@ -2,18 +2,20 @@
 <head>
 	<title>Mike and Vito's awesome chat app</title>
 	<link rel="stylesheet" type="text/css" href="styles/css/main.css"/>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 	<script src="bower_components/react/react.js"></script>
 	<script src="bower_components/react/JSXTransformer.js"></script>
 	<script src="js/chat.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
+	<h1>Mike and Vito's awesome chat app</h1>
 	<div id="content">
 		<ul id="messages"></ul>
 		<ul id="usernames"></ul>
 	</div>
 	<div id="input">
-		<input id="message" type="text"></input>
+		<input id="message" type="text" placeholder='Type a message'></input>
 		<button id="submit">Go</button>
 	</div>
 </body>  

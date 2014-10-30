@@ -1,6 +1,9 @@
 body {
-	background: #40201b;
-	color: #e2d8d8;
+	background: #28596C;
+	color: white;
+	font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
 #content {
@@ -33,10 +36,15 @@ body {
 	#message {
 		width: 750px;
 		height: 40px;
+		font-size: 24px;
+		padding-left: 4px;
 	}
 
 	#submit {
-		width: 46px;
+		width: 39px;
 		height: 40px;
+		position: relative;
+		margin-left: 6px;
+		bottom: 5px;
 	}
 }
