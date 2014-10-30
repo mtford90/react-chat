@@ -54,17 +54,6 @@ var Username = React.createClass({
   }
 });
 
-var TextField = React.createClass({
-  render: function() {
-    return (
-      <div id="input">
-        <input id="message" type="text" placeholder='Type a message'></input>
-        <button id="submit">Go</button>
-      </div>
-    );
-  }
-});
-
 var USERS = [
 	{username: 'Vito'},
 	{username: 'Mike'}
