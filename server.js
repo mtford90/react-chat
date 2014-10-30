@@ -1,17 +1,11 @@
 'use strict';
 
-var http = require('http'),
-    socketio = require('socket.io');
-
-var app = http.createServer(),
-    io = socketio(app),
-    users = [],
-    sockets = {};
-
 var express = require('express'),
     app = express(),
     http = require('http').Server(app),
-    io = require('socket.io')(http);
+    io = require('socket.io')(http),
+    users = [],
+    sockets = {};
 
 app.use(express.static(__dirname + '/public'));
 
@@ -22,9 +16,9 @@ io.on('connection', function(socket) {
   socket.on('join', function(data) {
     console.log('user joined: ' + data);
 
-    socket.emit('new user', { username: data.username, users: users });
     users.push(data.username);
     sockets[socket.id] = data.username;
+    socket.emit('new user', { username: data.username, users: users });
   });
 
   socket.on('message', function(data) {
@@ -38,6 +32,7 @@ io.on('connection', function(socket) {
         index = users.indexOf(user);
 
     delete user[index];
+    delete sockets[socket.id];
 
     socket.emit('updated users', { users: users });
   });
