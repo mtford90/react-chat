@@ -5,7 +5,7 @@
 - React is a JavaScript library for creating user interfaces.
 - React is all about building reusable components. 
 - "*React* to data changes"
-	- It uses a fast, internal mock DOM to perform diffs and computes the most efficient DOM mutation for you.
+    - It uses a fast, internal mock DOM to perform diffs and computes the most efficient DOM mutation for you.
  */
 
 var MessageBox = React.createClass({
@@ -15,13 +15,13 @@ var MessageBox = React.createClass({
     this.props.messages.forEach(function(message) {
       messageComponents.push(<Message username={message.username} message={message.message} key={message.id}/>);
     });
-	   /* 
+       /* 
       JSX is transformed into native Javascript. If we didn't use JSX, it would like this:
-      	- React.createElement('ul', { id: 'messages' }, messageComponents); 
-  	 */
+        - React.createElement('ul', { id: 'messages' }, messageComponents); 
+     */
     return (
       <ul id="messages">
-      	{messageComponents}  
+        {messageComponents}  
       </ul>
     );
   }
@@ -66,18 +66,32 @@ var MessageInput = React.createClass({
 
 var UsernameBox = React.createClass({
   render: function() {
-	var userComponents = [];
+      var userComponents = [];
 
-    this.props.users.forEach(function(u) {
-      userComponents.push(<Username username={u.username} key={u.username}/>);
-    });
+      this.props.users.forEach(function(u) {
+          userComponents.push(<Username username={u.username} key={u.username}/>);
+      });
 
-    return (
-      <ul id="users">
-      	  {userComponents}
-      </ul>
-    );
+      return (
+          <ul id="users">
+              {userComponents}
+          </ul>
+      );
   }
+});
+
+var LoginBox = React.createClass({
+    onSubmit: function () {
+        this.props.onSubmit(this.refs.username.getDOMNode().value.trim());
+    },
+    render: function () {
+        return (
+            <div>
+                <input type="text" ref="username"/>
+                <button onClick={this.onSubmit}>Go</button>
+            </div>
+        );
+    }
 });
 
 var Username = React.createClass({
@@ -91,21 +105,19 @@ var Username = React.createClass({
 var App = React.createClass({
     getInitialState: function() {
         return {
-            users: [
-                 { username: 'Vito' },
-                 { username: 'Mike' }
-            ],
+            users: [],
 
             messages: [
               { username: 'Mike', message: 'Hello mate', id: 1 },
               { username: 'Vito', message: 'Wassup'    , id: 2 }
-            ]
+            ],
+
+            username: null
         };
     },
 
-    handleSubmit: function(message) {
+    handleMessageSubmit: function(message) {
         this.setState({
-            users: this.state.users,
             messages: this.state.messages.concat({
                 username: 'Really Change This Later.',
                 message : message,
@@ -114,16 +126,32 @@ var App = React.createClass({
         });
     },
 
+    handleUsernameSubmit: function (username) {
+        this.setState({
+            username: username,
+            users: this.state.users.concat({username: username})
+        });
+    },
+
     render: function() {
-        return (
-            <div>
-                <div id="content">
-                    <MessageBox messages={this.state.messages} />
-                    <UsernameBox users={this.state.users} />
+        var view;
+        if (this.state.username) {
+            view = (
+                <div>
+                    <div id="content">
+                        <MessageBox messages={this.state.messages} />
+                        <UsernameBox users={this.state.users} />
+                    </div>
+                    <MessageInput onSubmit={this.handleMessageSubmit} />
                 </div>
-                <MessageInput onSubmit={this.handleSubmit} />
-            </div>
-        );
+            );
+        }
+        else {
+            view = (
+                <LoginBox onSubmit={this.handleUsernameSubmit}/>
+            );
+        }
+        return view;
     }
 });
 
