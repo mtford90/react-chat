@@ -15,13 +15,13 @@ var MessageBox = React.createClass({
     this.props.messages.forEach(function(message) {
       messageComponents.push(<Message username={message.username} message={message.message} key={message.id}/>);
     });
-	/* 
+	   /* 
       JSX is transformed into native Javascript. If we didn't use JSX, it would like this:
       	- React.createElement('ul', { id: 'messages' }, messageComponents); 
   	 */
     return (
       <ul id="messages">
-      	{messageComponents}
+      	{messageComponents}  
       </ul>
     );
   }
