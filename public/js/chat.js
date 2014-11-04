@@ -84,23 +84,39 @@ var Username = React.createClass({
   }
 });
 
-var USERS = [
-	{username: 'Vito'},
-	{username: 'Mike'}
-];
+var App = React.createClass({
+    getInitialState: function() {
+        return {
+            users: [
+                 { username: 'Vito' },
+                 { username: 'Mike' }
+            ],
 
-var MESSAGES = [
-  {username: 'Mike', message: 'Hello mate', id: 1},
-  {username: 'Vito', message: 'Wassup', id: 2}
-];
+            messages: [
+              { username: 'Mike', message: 'Hello mate', id: 1 },
+              { username: 'Vito', message: 'Wassup'    , id: 2 }
+            ]
+        };
+    },
+
+    handleSubmit: function() {
+        // TODO: Make this not suck.
+    },
+
+    render: function() {
+        return (
+            <div>
+                <div id="content">
+                    <MessageBox messages={this.state.messages} />
+                    <UsernameBox users={this.state.users} />
+                </div>
+                <MessageInput onSubmit={this.handleSubmit} />
+            </div>
+        );
+    }
+});
 
 /* Render HTML tags through use of lowercase names */
 React.render((
-	<div>
-		<div id="content">
-			<MessageBox messages={MESSAGES} />
-			<UsernameBox users={USERS} />
-		</div>
-        <MessageInput />
-	</div>
+    <App />
 ), document.getElementById('wrapper'));
