@@ -5,6 +5,21 @@ body {
   -webkit-font-smoothing: antialiased;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); }
 
+#input {
+  width: 800px;
+  margin-top: 10px; }
+  #input #message {
+    width: 750px;
+    height: 40px;
+    font-size: 24px;
+    padding-left: 4px; }
+  #input #submit {
+    width: 39px;
+    height: 40px;
+    position: relative;
+    margin-left: 6px;
+    bottom: 5px; }
+
 #content {
   width: 800px;
   padding: 0;
@@ -33,18 +48,3 @@ body {
       #content ul#messages .username {
         font-weight: bold;
         margin-right: 5px; }
-
-#input {
-  width: 800px;
-  margin-top: 10px; }
-  #input #message {
-    width: 750px;
-    height: 40px;
-    font-size: 24px;
-    padding-left: 4px; }
-  #input #submit {
-    width: 39px;
-    height: 40px;
-    position: relative;
-    margin-left: 6px;
-    bottom: 5px; }

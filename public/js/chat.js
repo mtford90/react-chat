@@ -3,7 +3,7 @@
 
 /*
 - React is a JavaScript library for creating user interfaces.
-- React is all about building reusable components. 
+- React is all about building reusable components.
 - "*React* to data changes"
     - It uses a fast, internal mock DOM to perform diffs and computes the most efficient DOM mutation for you.
  */
@@ -15,13 +15,13 @@ var MessageBox = React.createClass({
     this.props.messages.forEach(function(message) {
       messageComponents.push(<Message username={message.username} message={message.message} key={message.id}/>);
     });
-       /* 
+       /*
       JSX is transformed into native Javascript. If we didn't use JSX, it would like this:
-        - React.createElement('ul', { id: 'messages' }, messageComponents); 
+        - React.createElement('ul', { id: 'messages' }, messageComponents);
      */
     return (
       <ul id="messages">
-        {messageComponents}  
+        {messageComponents}
       </ul>
     );
   }
@@ -42,24 +42,22 @@ var Message = React.createClass({
 
 // The component to represent user input.
 var MessageInput = React.createClass({
-    getInitialState: function() {
-        return {message: ''};
+
+    onSubmit: function(e) {
+        e.preventDefault();
+
+        var input = this.refs.message.getDOMNode()
+        this.props.onSubmit(input.value.trim());
+
+        input.value = '';
     },
-    
-    onKeyUp: function () {
-        this.setState({message: 'rawrboom'});
-    },
-    
-    onSubmit: function() {
-        this.props.onSubmit(this.state.message);
-    },
-    
+
     render: function () {
         return (
-            <div id="input">
-                <input id="message" type="text" placeholder="Type a message" onKeyUp={this.onKeyUp}></input>
-                <button id="submit" onClick={this.onSubmit}>Go</button>
-            </div>
+            <form onSubmit={this.onSubmit} id="input">
+                <input id="message" type="text" placeholder="Type a message" ref="message"/>
+                <button id="submit" type="submit">Go</button>
+            </form>
         );
     }
 });
@@ -81,15 +79,16 @@ var UsernameBox = React.createClass({
 });
 
 var LoginBox = React.createClass({
-    onSubmit: function () {
+    onSubmit: function (e) {
+        e.preventDefault();
         this.props.onSubmit(this.refs.username.getDOMNode().value.trim());
     },
     render: function () {
         return (
-            <div>
+            <form onSubmit={this.onSubmit}>
                 <input type="text" ref="username"/>
-                <button onClick={this.onSubmit}>Go</button>
-            </div>
+                <input type="submit" value="Go"/>
+            </form>
         );
     }
 });
@@ -119,7 +118,7 @@ var App = React.createClass({
     handleMessageSubmit: function(message) {
         this.setState({
             messages: this.state.messages.concat({
-                username: 'Really Change This Later.',
+                username: this.state.username,
                 message : message,
                 id      : this.state.messages.length + 1
             })

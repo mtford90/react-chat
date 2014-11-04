@@ -6,6 +6,8 @@ body {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
+@import "form";
+
 #content {
 	width: 800px;
 	padding: 0;
@@ -15,7 +17,7 @@ body {
 	ul {
 		list-style-type: none;
 		background-color: white;
-		&#users { 
+		&#users {
 			float: right;
 			width: 140px;
 			height: 490px;
@@ -39,24 +41,5 @@ body {
 			}
 			overflow: scroll;
 		}
-	}	
-} 
-
-#input {
-	width: 800px;
-	margin-top: 10px;
-	#message {
-		width: 750px;
-		height: 40px;
-		font-size: 24px;
-		padding-left: 4px;
-	}
-
-	#submit {
-		width: 39px;
-		height: 40px;
-		position: relative;
-		margin-left: 6px;
-		bottom: 5px;
 	}
 }
