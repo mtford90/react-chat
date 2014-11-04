@@ -105,39 +105,42 @@ var App = React.createClass({
     getInitialState: function() {
         return {
             users: [],
-
-            messages: [
-              { username: 'Mike', message: 'Hello mate', id: 1 },
-              { username: 'Vito', message: 'Wassup'    , id: 2 }
-            ],
-
+            messages: [],
             username: null,
-
             socket: io()
         };
     },
 
     componentDidMount: function() {
-        this.state.socket.on('new user', function(data) {
-            this.setState({
-                users: data.users,
-                username: data.username
-            });
-        }.bind(this));
+        this.state.socket
+            .on('message', function(data) {
+                this.setState({
+                    messages: this.state.messages.concat(data)
+                });
+            }.bind(this))
+            .on('new user', function(data) {
+                this.setState({
+                    users: data.users
+                });
+            }.bind(this));
     },
 
     handleMessageSubmit: function(message) {
-        this.setState({
-            messages: this.state.messages.concat({
-                username: this.state.username,
-                message : message,
-                id      : this.state.messages.length + 1
-            })
-        });
+        this.state.socket.emit('message', {message: message, username: this.state.username});
+        // this.setState({
+        //     messages: this.state.messages.concat({
+        //         username: this.state.username,
+        //         message : message,
+        //         id      : this.state.messages.length + 1
+        //     })
+        // });
     },
 
     handleUsernameSubmit: function (username) {
         this.state.socket.emit('join', {
+            username: username
+        });
+        this.setState({
             username: username
         });
     },
