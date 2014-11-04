@@ -23,8 +23,7 @@ io.on('connection', function(socket) {
 
   socket.on('message', function(data) {
     console.log('new message: ' + data);
-
-    socket.emit('message', { text: data.message });
+    io.sockets.emit('message', data);
   });
 
   socket.on('disconnect', function() {
