@@ -50,11 +50,15 @@ var MessageInput = React.createClass({
         this.setState({message: 'rawrboom'});
     },
     
+    onSubmit: function() {
+        this.props.onSubmit(this.state.message);
+    },
+    
     render: function () {
         return (
             <div id="input">
                 <input id="message" type="text" placeholder="Type a message" onKeyUp={this.onKeyUp}></input>
-                <button id="submit">Go</button>
+                <button id="submit" onClick={this.onSubmit}>Go</button>
             </div>
         );
     }
@@ -99,8 +103,15 @@ var App = React.createClass({
         };
     },
 
-    handleSubmit: function() {
-        // TODO: Make this not suck.
+    handleSubmit: function(message) {
+        this.setState({
+            users: this.state.users,
+            messages: this.state.messages.concat({
+                username: 'Really Change This Later.',
+                message : message,
+                id      : this.state.messages.length + 1
+            })
+        });
     },
 
     render: function() {
