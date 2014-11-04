@@ -67,7 +67,7 @@ var UsernameBox = React.createClass({
       var userComponents = [];
 
       this.props.users.forEach(function(u) {
-          userComponents.push(<Username username={u.username} key={u.username}/>);
+          userComponents.push(<Username username={u}/>);
       });
 
       return (
@@ -111,8 +111,19 @@ var App = React.createClass({
               { username: 'Vito', message: 'Wassup'    , id: 2 }
             ],
 
-            username: null
+            username: null,
+
+            socket: io()
         };
+    },
+
+    componentDidMount: function() {
+        this.state.socket.on('new user', function(data) {
+            this.setState({
+                users: data.users,
+                username: data.username
+            });
+        }.bind(this));
     },
 
     handleMessageSubmit: function(message) {
@@ -126,9 +137,8 @@ var App = React.createClass({
     },
 
     handleUsernameSubmit: function (username) {
-        this.setState({
-            username: username,
-            users: this.state.users.concat({username: username})
+        this.state.socket.emit('join', {
+            username: username
         });
     },
 

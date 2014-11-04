@@ -14,11 +14,11 @@ io.on('connection', function(socket) {
   console.log('new connection');
 
   socket.on('join', function(data) {
-    console.log('user joined: ' + data);
+    console.log('user joined: ' + data.username);
 
     users.push(data.username);
     sockets[socket.id] = data.username;
-    socket.emit('new user', { username: data.username, users: users });
+    io.sockets.emit('new user', { username: data.username, users: users });
   });
 
   socket.on('message', function(data) {
@@ -31,8 +31,8 @@ io.on('connection', function(socket) {
     var user = sockets[socket.id],
         index = users.indexOf(user);
 
-    delete user[index];
-    delete sockets[socket.id];
+    // delete user[index];
+    // delete sockets[socket.id];
 
     socket.emit('updated users', { users: users });
   });
