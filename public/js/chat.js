@@ -40,6 +40,26 @@ var Message = React.createClass({
   }
 });
 
+// The component to represent user input.
+var MessageInput = React.createClass({
+    getInitialState: function() {
+        return {message: ''};
+    },
+    
+    onKeyUp: function () {
+        this.setState({message: 'rawrboom'});
+    },
+    
+    render: function () {
+        return (
+            <div id="input">
+                <input id="message" type="text" placeholder="Type a message" onKeyUp={this.onKeyUp}></input>
+                <button id="submit">Go</button>
+            </div>
+        );
+    }
+});
+
 var UsernameBox = React.createClass({
   render: function() {
 	var userComponents = [];
@@ -81,9 +101,6 @@ React.render((
 			<MessageBox messages={MESSAGES} />
 			<UsernameBox users={USERS} />
 		</div>
-		<div id="input">
-			<input id="message" type="text" placeholder='Type a message'></input>
-			<button id="submit">Go</button>
-		</div>
+        <MessageInput />
 	</div>
 ), document.getElementById('wrapper'));
