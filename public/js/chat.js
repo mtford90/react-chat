@@ -40,6 +40,30 @@ var Message = React.createClass({
   }
 });
 
+// The component to represent user input.
+var MessageInput = React.createClass({
+    getInitialState: function() {
+        return {message: ''};
+    },
+    
+    onKeyUp: function () {
+        this.setState({message: 'rawrboom'});
+    },
+    
+    onSubmit: function() {
+        this.props.onSubmit(this.state.message);
+    },
+    
+    render: function () {
+        return (
+            <div id="input">
+                <input id="message" type="text" placeholder="Type a message" onKeyUp={this.onKeyUp}></input>
+                <button id="submit" onClick={this.onSubmit}>Go</button>
+            </div>
+        );
+    }
+});
+
 var UsernameBox = React.createClass({
   render: function() {
 	var userComponents = [];
@@ -64,26 +88,46 @@ var Username = React.createClass({
   }
 });
 
-var USERS = [
-	{username: 'Vito'},
-	{username: 'Mike'}
-];
+var App = React.createClass({
+    getInitialState: function() {
+        return {
+            users: [
+                 { username: 'Vito' },
+                 { username: 'Mike' }
+            ],
 
-var MESSAGES = [
-  {username: 'Mike', message: 'Hello mate', id: 1},
-  {username: 'Vito', message: 'Wassup', id: 2}
-];
+            messages: [
+              { username: 'Mike', message: 'Hello mate', id: 1 },
+              { username: 'Vito', message: 'Wassup'    , id: 2 }
+            ]
+        };
+    },
+
+    handleSubmit: function(message) {
+        this.setState({
+            users: this.state.users,
+            messages: this.state.messages.concat({
+                username: 'Really Change This Later.',
+                message : message,
+                id      : this.state.messages.length + 1
+            })
+        });
+    },
+
+    render: function() {
+        return (
+            <div>
+                <div id="content">
+                    <MessageBox messages={this.state.messages} />
+                    <UsernameBox users={this.state.users} />
+                </div>
+                <MessageInput onSubmit={this.handleSubmit} />
+            </div>
+        );
+    }
+});
 
 /* Render HTML tags through use of lowercase names */
 React.render((
-	<div>
-		<div id="content">
-			<MessageBox messages={MESSAGES} />
-			<UsernameBox users={USERS} />
-		</div>
-		<div id="input">
-			<input id="message" type="text" placeholder='Type a message'></input>
-			<button id="submit">Go</button>
-		</div>
-	</div>
+    <App />
 ), document.getElementById('wrapper'));
