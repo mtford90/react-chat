@@ -32,5 +32,4 @@ gulp.task('watch', function() {
 
     watch(JS_FILES)
         .pipe(livereload());
-
 });
