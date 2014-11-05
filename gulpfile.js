@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
+    open = require('gulp-open'),
     sass = require('gulp-sass'),
-    livereload = require('gulp-livereload'),
     watch = require('gulp-watch'),
+    livereload = require('gulp-livereload'),
+
     nodemon = require('nodemon');
 
 var SCSS_FILES = './public/styles/scss/**/*.scss';
@@ -26,6 +28,11 @@ gulp.task('watch', function() {
         .pipe(sass())
         .pipe(gulp.dest(CSS_FOLDER))
         .pipe(livereload());
+
+    gulp.src('./public/index.html')
+        .pipe(open('', {
+          url: 'http://localhost:3000'
+        }))
 
     watch(HTML_FILES)
         .pipe(livereload());
