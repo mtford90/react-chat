@@ -1,9 +1,11 @@
 'use strict';
 
 var gulp = require('gulp'),
+    open = require('gulp-open'),
     sass = require('gulp-sass'),
-    livereload = require('gulp-livereload'),
     watch = require('gulp-watch'),
+    livereload = require('gulp-livereload'),
+
     nodemon = require('nodemon');
 
 var SCSS_FILES = './public/styles/scss/**/*.scss';
@@ -11,7 +13,12 @@ var CSS_FOLDER = './public/styles/css';
 var HTML_FILES = './public/**/*.html';
 var JS_FILES = './public/js/**/*.js';
 
-gulp.task('watch', ['nodeWatch', 'scssWatch', 'htmlJsWatch']);
+gulp.task('watch', ['nodeWatch', 'scssWatch', 'htmlJsWatch'], function() {
+    gulp.src('./public/index.html')
+        .pipe(open('', {
+            url: 'http://localhost:3000',
+        }));
+});
 
 gulp.task('nodeWatch', function() {
     nodemon({
@@ -38,6 +45,11 @@ gulp.task('scssWatch', function() {
 });
 
 gulp.task('htmlJsWatch', function() {
-    watch( [HTML_FILES, JS_FILES] )
+    watch( [HTML_FILES, JS_FILES] );
+
+    watch(HTML_FILES)
+        .pipe(livereload());
+
+    watch(JS_FILES)
         .pipe(livereload());
 });
