@@ -1,26 +1,33 @@
 {
-  "name": "react-chat",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "gulp": "^3.8.9",
-    "gulp-karma": "0.0.4",
-    "gulp-livereload": "^2.1.1",
-    "gulp-mocha": "^1.1.1",
-    "gulp-sass": "^1.2.2",
-    "gulp-watch": "^1.1.0",
-    "nodemon": "^1.2.1"
-  },
-  "dependencies": {
-    "express": "^4.10.1",
-    "gulp-open": "^0.3.0",
-    "node": "0.0.0",
-    "socket.io": "^1.2.0"
-  }
+    "name": "react-chat",
+    "version": "0.1.0",
+    "description": "",
+    "author": "",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mtford90/react-chat.git"
+    },
+    "bugs": {
+        "url": "https://github.com/mtford90/react-chat/issues"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "express": "^4.10.1",
+        "gulp-open": "^0.3.0",
+        "socket.io": "^1.2.0"
+    },
+    "devDependencies": {
+        "gulp": "^3.8.9",
+        "gulp-karma": "0.0.4",
+        "gulp-livereload": "^2.1.1",
+        "gulp-mocha": "^1.1.1",
+        "gulp-ruby-sass": "^0.7.1",
+        "gulp-watch": "^1.1.0",
+        "nodemon": "^1.2.1"
+    },
+    "private": true,
+    "license": "ISC"
 }
