@@ -47,11 +47,6 @@ gulp.task('scssWatch', function() {
 gulp.task('htmlJsWatch', function() {
     watch( [HTML_FILES, JS_FILES] );
 
-    gulp.src('./public/index.html')
-        .pipe(open('', {
-          url: 'http://localhost:3000'
-        }))
-
     watch(HTML_FILES)
         .pipe(livereload());
 
