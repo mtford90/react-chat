@@ -37,6 +37,7 @@ gulp.task('styles', function() {
     return gulp.src(SCSS_FILES)
         .pipe(sass({
             style: 'compact',
+            precision: 10,
             loadPath: './public/bower_components/bootstrap-sass-official/assets/stylesheets/'
         }))
         .on('error', function(err) {

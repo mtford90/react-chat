@@ -1,48 +1,55 @@
-body {
-    background: #28596C;
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
-}
+@import "config";
 
-@import "form";
+// Core variables and mixins
+@import "bootstrap/variables";
 
-#content {
-    width: 800px;
-    padding: 0;
-    margin: 0;
-    height: 500px;
-    color: black;
+@import "bootstrap/mixins";
 
-    ul {
-        list-style-type: none;
-        background-color: white;
+// Reset and dependencies
+@import "bootstrap/normalize";
+@import "bootstrap/print";
+@import "bootstrap/glyphicons";
 
-        &#users {
-            float: right;
-            width: 140px;
-            height: 490px;
-            padding: 5px;
-            margin: 0;
+// Core CSS
+@import "bootstrap/scaffolding";
+@import "bootstrap/type";
+@import "bootstrap/code";
+@import "bootstrap/grid";
+@import "bootstrap/tables";
+@import "bootstrap/forms";
+@import "bootstrap/buttons";
 
-            .username {
-                font-weight: bold;
-            }
-        }
+// Components
+@import "bootstrap/component-animations";
+@import "bootstrap/dropdowns";
+@import "bootstrap/button-groups";
+@import "bootstrap/input-groups";
+@import "bootstrap/navs";
+@import "bootstrap/navbar";
+@import "bootstrap/breadcrumbs";
+@import "bootstrap/pagination";
+@import "bootstrap/pager";
+@import "bootstrap/labels";
+@import "bootstrap/badges";
+@import "bootstrap/jumbotron";
+@import "bootstrap/thumbnails";
+@import "bootstrap/alerts";
+@import "bootstrap/progress-bars";
+@import "bootstrap/media";
+@import "bootstrap/list-group";
+@import "bootstrap/panels";
+@import "bootstrap/responsive-embed";
+@import "bootstrap/wells";
+@import "bootstrap/close";
 
-        &#messages {
-            float: left;
-            width: 630px;
-            height: 490px;
-            padding: 5px;
-            margin: 0;
-            overflow: scroll;
+// Components w/ JavaScript
+@import "bootstrap/modals";
+@import "bootstrap/tooltip";
+@import "bootstrap/popovers";
+@import "bootstrap/carousel";
 
-            .username {
-                font-weight: bold;
-                margin-right: 5px;
-            }
-        }
-    }
-}
+// Utility classes
+@import "bootstrap/utilities";
+@import "bootstrap/responsive-utilities";
+
+@import "tweeks";

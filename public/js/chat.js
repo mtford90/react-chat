@@ -9,35 +9,43 @@
  */
 
 var MessageBox = React.createClass({
-  render: function() {
-    var messageComponents = [];
+    render: function() {
+        var messageComponents = [];
 
-    this.props.messages.forEach(function(message) {
-      messageComponents.push(<Message username={message.username} message={message.message} key={message.id}/>);
-    });
-       /*
-      JSX is transformed into native Javascript. If we didn't use JSX, it would like this:
+        this.props.messages.forEach(function(message) {
+            messageComponents.push(<Message username={message.username} message={message.message} key={message.id}/>);
+        });
+        /*
+        JSX is transformed into native Javascript. If we didn't use JSX, it would like this:
         - React.createElement('ul', { id: 'messages' }, messageComponents);
-     */
-    return (
-      <ul id="messages">
-        {messageComponents}
-      </ul>
-    );
-  }
+        */
+        return (
+            <div className={this.props.className}>
+                <div className="panel panel-default">
+                    <div className="panel-heading">
+                        <h1 className="panel-title">Messages</h1>
+                    </div>
+                    <div className="panel-body messages">
+                        <ul className="list-unstyled">
+                            {messageComponents}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 });
 
 var Message = React.createClass({
-  render: function() {
-    return (
-      <li>
-        {/* Interestingly, we need do className="xyz" instead of class="xyz"...
-            Also we need to wrap comments within JSX in a JS block :S */}
-        <span className="username">{this.props.username}:</span>
-        <span className="message">{this.props.message}</span>
-      </li>
-    );
-  }
+    render: function() {
+        return (
+            <li>
+                {/* Interestingly, we need do className="xyz" instead of class="xyz"...
+                Also we need to wrap comments within JSX in a JS block :S */}
+                <b className="username">{this.props.username}:</b> <span className="message">{this.props.message}</span>
+            </li>
+        );
+    }
 });
 
 // The component to represent user input.
@@ -54,28 +62,41 @@ var MessageInput = React.createClass({
 
     render: function () {
         return (
-            <form onSubmit={this.onSubmit} id="input">
-                <input id="message" type="text" placeholder="Type a message" ref="message"/>
-                <button id="submit" type="submit">Go</button>
+            <form onSubmit={this.onSubmit}>
+                <div className="form-group">
+                    <div className="input-group">
+                        <input type="text" className="form-control" ref="username" placeholder="Type a message" ref="message" autoFocus="true"/>
+                        <span className="input-group-btn">
+                            <button type="submit" className="btn btn-default">Go</button>
+                        </span>
+                    </div>
+                </div>
             </form>
         );
     }
 });
 
 var UsernameBox = React.createClass({
-  render: function() {
-      var userComponents = [];
+    render: function() {
+        var userComponents = [];
 
-      this.props.users.forEach(function(u) {
-          userComponents.push(<Username username={u}/>);
-      });
+        this.props.users.forEach(function(u) {
+            userComponents.push(<Username username={u}/>);
+        });
 
-      return (
-          <ul id="users">
-              {userComponents}
-          </ul>
-      );
-  }
+        return (
+            <div className={this.props.className}>
+                <div className="panel panel-default">
+                    <div className="panel-heading">
+                        <h2 className="panel-title">Users</h2>
+                    </div>
+                    <ul id="users" className="list-group">
+                        {userComponents}
+                    </ul>
+                </div>
+            </div>
+        );
+    }
 });
 
 var LoginBox = React.createClass({
@@ -85,20 +106,28 @@ var LoginBox = React.createClass({
     },
     render: function () {
         return (
-            <form onSubmit={this.onSubmit}>
-                <input type="text" ref="username"/>
-                <input type="submit" value="Go"/>
+            <form className="form-inline" onSubmit={this.onSubmit}>
+                <div className="form-group">
+                    <div className="input-group">
+                        <input type="text" className="form-control" ref="username" placeholder="name" autoFocus="true"/>
+                        <span className="input-group-btn">
+                            <button type="submit" className="btn btn-default">Go</button>
+                        </span>
+                    </div>
+                </div>
             </form>
         );
     }
 });
 
 var Username = React.createClass({
-  render: function() {
-    return (
-      <li><span className="username">{this.props.username}</span></li>
-    );
-  }
+    render: function() {
+        return (
+            <li className="list-group-item">
+                <span className="username">{this.props.username}</span>
+            </li>
+        );
+    }
 });
 
 var App = React.createClass({
@@ -127,13 +156,6 @@ var App = React.createClass({
 
     handleMessageSubmit: function(message) {
         this.state.socket.emit('message', {message: message, username: this.state.username});
-        // this.setState({
-        //     messages: this.state.messages.concat({
-        //         username: this.state.username,
-        //         message : message,
-        //         id      : this.state.messages.length + 1
-        //     })
-        // });
     },
 
     handleUsernameSubmit: function (username) {
@@ -149,12 +171,12 @@ var App = React.createClass({
         var view;
         if (this.state.username) {
             view = (
-                <div>
-                    <div id="content">
+                <div id="content" className="row">
+                    <div className="col-xs-9">
                         <MessageBox messages={this.state.messages} />
-                        <UsernameBox users={this.state.users} />
+                        <MessageInput onSubmit={this.handleMessageSubmit} />
                     </div>
-                    <MessageInput onSubmit={this.handleMessageSubmit} />
+                    <UsernameBox className="col-xs-3" users={this.state.users} currentUser={this.state.username} />
                 </div>
             );
         }
