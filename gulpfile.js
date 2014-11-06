@@ -2,7 +2,7 @@
 
 var gulp = require('gulp'),
     open = require('gulp-open'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-ruby-sass'),
     watch = require('gulp-watch'),
     livereload = require('gulp-livereload'),
 
@@ -33,15 +33,21 @@ gulp.task('nodeWatch', function() {
     });
 });
 
-gulp.task('scssWatch', function() {
-    watch(SCSS_FILES)
+gulp.task('styles', function() {
+    return gulp.src(SCSS_FILES)
         .pipe(sass({
-            onError: function(err) {
-                console.log('you call that scss? check out this error: \n', err);
-            }
+            style: 'compact',
+            loadPath: './public/bower_components/bootstrap-sass-official/assets/stylesheets/'
         }))
+        .on('error', function(err) {
+            console.log('you call that scss? check out this error: \n', err);
+        })
         .pipe(gulp.dest(CSS_FOLDER))
         .pipe(livereload());
+});
+
+gulp.task('scssWatch', function() {
+    gulp.watch(SCSS_FILES, ['styles'])
 });
 
 gulp.task('htmlJsWatch', function() {

@@ -1,50 +1,14 @@
-body {
-  background: #28596C;
-  color: white;
-  font-family: 'Open Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); }
+body { background: #28596C; color: white; font-family: 'Open Sans', sans-serif; -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); }
 
-#input {
-  width: 800px;
-  margin-top: 10px; }
-  #input #message {
-    width: 750px;
-    height: 40px;
-    font-size: 24px;
-    padding-left: 4px; }
-  #input #submit {
-    width: 39px;
-    height: 40px;
-    position: relative;
-    margin-left: 6px;
-    bottom: 5px; }
+#input { width: 800px; margin-top: 10px; }
+#input #message { width: 750px; height: 40px; font-size: 24px; padding-left: 4px; }
+#input #submit { width: 39px; height: 40px; position: relative; margin-left: 6px; bottom: 5px; }
 
-#content {
-  width: 800px;
-  padding: 0;
-  margin: 0;
-  height: 500px;
-  color: black; }
-  #content ul {
-    list-style-type: none;
-    background-color: white; }
-    #content ul#users {
-      float: right;
-      width: 140px;
-      height: 490px;
-      padding: 0;
-      margin: 0;
-      padding: 5px; }
-      #content ul#users .username {
-        font-weight: bold; }
-    #content ul#messages {
-      float: left;
-      width: 630px;
-      height: 490px;
-      padding: 5px;
-      margin: 0;
-      overflow: scroll; }
-      #content ul#messages .username {
-        font-weight: bold;
-        margin-right: 5px; }
+#content { width: 800px; padding: 0; margin: 0; height: 500px; color: black; }
+#content ul { list-style-type: none; background-color: white; }
+#content ul#users { float: right; width: 140px; height: 490px; padding: 0; margin: 0; padding: 5px; }
+#content ul#users .username { font-weight: bold; }
+#content ul#messages { float: left; width: 630px; height: 490px; padding: 5px; margin: 0; overflow: scroll; }
+#content ul#messages .username { font-weight: bold; margin-right: 5px; }
+
+/*# sourceMappingURL=main.css.map */
